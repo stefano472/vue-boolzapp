@@ -168,11 +168,37 @@ const boolzapp = new Vue({
     el: '#boolzapp',
     data: {
         contacts,
+        activeContact: null,
+        // key con classe per i messaggi
+        messageSent: 'message-sent',
+        messageReceived: 'message-received',
+        // key per aggiungere un mex all'enter dell'input collegata al value 
+        newMessage: ''
     },
     methods: {
-        imgURLAvatar: function(id){
+        // function per passare l'url delle immagini in base all'avatar
+       imgURLAvatar: function(id){
             return `img/avatar${id}.jpg`;
-        },
+       },
        
+        // function per passare l'indice del conctact selezionato dall'array 
+       setActiveContact(i) {
+            this.activeContact = i
+       },
+       //function per passare il nuovo mex nell'array
+       pushNewMessage(i) {
+            if ((this.newMessage.trim()).length > 0) {
+            
+                this.contacts[i].messages.push(
+                    {
+                        date: '10/01/2020 15:51:00',
+                        message: this.newMessage,
+                        status: 'sent'
+                    }
+                )
+            
+            }
+            this.newMessage = ''
+       }
     }
 })

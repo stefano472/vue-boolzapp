@@ -41,33 +41,47 @@
                 <input type="text" placeholder="Cerca o inizia una nuova chat">
             </div>
             <div class="contacts">
-                <div class="contact" v-for="(contact, index) in contacts">
-                    <img :src="imgURLAvatar(contact.avatar)" alt="">
+                <div class="contact" v-for="(contact, index) in contacts" @click="setActiveContact(index)">
+                    <img :src="imgURLAvatar(contact.avatar)" :alt="'pic-contact'+ contact.avatar">
                     <div class="name-last-message">
                         <h1>{{contact.name}}</h1>
                         <p>{{ contact.messages[contact.messages.length - 1].message}}</p>
                     </div>
                     <div class="date">
-                        {{ contact.messages[contact.messages.length - 1].date.split(" ")[1] }}
+                        {{ contact.messages[contact.messages.length - 1].date.split(" ")[1].slice(0, 5) }}
                     </div>
                 </div>
             </div>
         </div>
         <div class="right-side">
-            <div class="profile">
-                <img src="img/avatar_io.jpg" alt="profile-pic">
-                <h1>Sofia</h1>
-                <div class="icons">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <i class="fa-solid fa-paperclip"></i>
-                    <i class="fa-solid fa-ellipsis-vertical"></i>
+            <div class="chat-selected" v-if="activeContact !== null">
+                <div class="profile">
+                    <img :src="imgURLAvatar(contacts[activeContact].avatar)" :alt="'-avatar'+ contacts[activeContact].avatar">
+                    <div class="contact-info">
+                        <h1>{{ contacts[activeContact].name }}</h1>
+                        <p>Ultimo accesso oggi alle 12:00</p>
+                    </div>
+                    <div class="icons">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <i class="fa-solid fa-paperclip"></i>
+                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                    </div>
+                </div>
+                <div class="messages-box">
+                    <div class="single-message" v-for="message in contacts[activeContact].messages" 
+                        :class="[message.status=== 'sent' ? messageSent : messageReceived]">
+                        <p class="display-message">{{ message.message }}</p>
+                        <p class="display-hour">{{ message.date.slice(11, 16) }}</p>
+                    </div>
+                </div>
+                <div class="type-message">
+                    <i class="fa-regular fa-face-smile"></i>
+                    <input type="text" placeholder="scrivi un messaggio" v-model="newMessage" @keyUp.enter="pushNewMessage(activeContact)">
+                    <i class="fa-solid fa-microphone"></i>
                 </div>
             </div>
-            <div class="messages-box"></div>
-            <div class="type-message">
-                <i class="fa-regular fa-face-smile"></i>
-                <input type="text" placeholder="scrivi un messaggio">
-                <i class="fa-solid fa-microphone"></i>
+            <div class="chat-unselected" v-else>
+                <p>select a chat to start messaging</p>
             </div>
         </div>
     </div>
