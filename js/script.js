@@ -173,7 +173,9 @@ const boolzapp = new Vue({
         messageSent: 'message-sent',
         messageReceived: 'message-received',
         // key per aggiungere un mex all'enter dell'input collegata al value 
-        newMessage: ''
+        newMessage: '',
+        // search bar
+        searchBar: ''
     },
     methods: {
         // function per passare l'url delle immagini in base all'avatar
@@ -199,6 +201,14 @@ const boolzapp = new Vue({
             
             }
             this.newMessage = ''
-       }
+       },
+    },
+    // computed property per filtrare il mio array in base alla searchbar
+    computed: {
+        filteredContacts() {
+           return this.contacts.filter((contact) => {
+               return contact.name.toLowerCase().includes(this.searchBar.toLowerCase())})
+        }
+    
     }
 })

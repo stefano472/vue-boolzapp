@@ -38,10 +38,10 @@
             </div>
             <div class="search-bar">
                 <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" placeholder="Cerca o inizia una nuova chat">
+                <input type="text" placeholder="Cerca o inizia una nuova chat" v-model="searchBar">
             </div>
             <div class="contacts">
-                <div class="contact" v-for="(contact, index) in contacts" @click="setActiveContact(index)">
+                <div class="contact" v-for="(contact, index) in filteredContacts" @click="setActiveContact(index)">
                     <img :src="imgURLAvatar(contact.avatar)" :alt="'pic-contact'+ contact.avatar">
                     <div class="name-last-message">
                         <h1>{{contact.name}}</h1>
