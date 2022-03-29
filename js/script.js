@@ -168,5 +168,11 @@ const boolzapp = new Vue({
     el: '#boolzapp',
     data: {
         contacts,
+    },
+    methods: {
+        imgURLAvatar: function(id){
+            return `img/avatar${id}.jpg`;
+        },
+       
     }
 })

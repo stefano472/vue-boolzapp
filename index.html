@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="css/style.css"/>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="js/script.js" defer></script>
 </head>
 <body>
@@ -27,11 +27,49 @@
                     <i class="fa-solid fa-ellipsis-vertical"></i>
                 </div>
             </div>
-            <div class="banner"></div>
-            <div class="search-bar"></div>
-            <div class="contacts"></div>
+            <div class="banner">
+                <div class="notification-icon">
+                    <i class="fa-solid fa-bell-slash"></i>
+                </div>
+                <div class="notification-message">
+                    <h2>Ricevi notifiche di nuovi messaggi</h2>
+                    <a href="#">Attiva notifiche desktop</a>
+                </div>
+            </div>
+            <div class="search-bar">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Cerca o inizia una nuova chat">
+            </div>
+            <div class="contacts">
+                <div class="contact" v-for="(contact, index) in contacts">
+                    <img :src="imgURLAvatar(contact.avatar)" alt="">
+                    <div class="name-last-message">
+                        <h1>{{contact.name}}</h1>
+                        <p>{{ contact.messages[contact.messages.length - 1].message}}</p>
+                    </div>
+                    <div class="date">
+                        {{ contact.messages[contact.messages.length - 1].date.split(" ")[1] }}
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="right-side"></div>
+        <div class="right-side">
+            <div class="profile">
+                <img src="img/avatar_io.jpg" alt="profile-pic">
+                <h1>Sofia</h1>
+                <div class="icons">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <i class="fa-solid fa-paperclip"></i>
+                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                </div>
+            </div>
+            <div class="messages-box"></div>
+            <div class="type-message">
+                <i class="fa-regular fa-face-smile"></i>
+                <input type="text" placeholder="scrivi un messaggio">
+                <i class="fa-solid fa-microphone"></i>
+            </div>
+        </div>
     </div>
 </body>
 </html>
