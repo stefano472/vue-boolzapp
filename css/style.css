@@ -227,11 +227,13 @@ h2 {
 .message-sent {
   background-color: #d5f9ba;
   align-self: end;
+  margin-left: 2rem;
 }
 
 .message-received {
   background-color: white;
   align-self: start;
+  margin-right: 2rem;
 }
 
 .display-hour {
