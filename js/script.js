@@ -169,6 +169,7 @@ const boolzapp = new Vue({
     data: {
         contacts,
         activeContact: null,
+
         // key per aggiungere un mex all'enter dell'input collegata al value 
         newMessage: '',
         // search bar
@@ -210,7 +211,9 @@ const boolzapp = new Vue({
 
         // function per passare l'indice del conctact selezionato dall'array 
        setActiveContact(i) {
-            this.activeContact = i
+            this.activeContact = i,
+
+            console.log(this.activeContact)
        },
        //function per passare il nuovo mex nell'array
        pushNewMessage(i) {
@@ -239,8 +242,10 @@ const boolzapp = new Vue({
     // computed property per filtrare il mio array in base alla searchbar
     computed: {
         filteredContacts() {
-           return this.contacts.filter((contact) => {
-               return contact.name.toLowerCase().includes(this.searchBar.toLowerCase())})
+            this.activeContact = null;
+            // console.log(this.activeContact);
+            return this.contacts.filter((contact) => {
+               return contact.name.toLowerCase().match(this.searchBar.toLowerCase())})
         }
     }
 })
