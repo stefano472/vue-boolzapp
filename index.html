@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="css/style.css"/>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
     <script src="js/script.js" defer></script>
 </head>
 <body>
@@ -46,10 +47,9 @@
                     <div class="name-last-message">
                         <h1>{{ contact.name }}</h1>
                         <p>{{ lastMessage(contact) }}</p>
-                        <!-- <p>{{ filteredContacts }}</p> -->
                     </div>
                     <div class="date">
-                        {{ contact.messages[contact.messages.length - 1].date.split(" ")[1].slice(0, 5) }}
+                        {{ returnHour(returnLastHour(contact)) }}
                     </div>
                 </div>
             </div>
@@ -72,7 +72,7 @@
                     <div class="single-message" v-for="message in filteredContacts[activeContact].messages" 
                         :class="message.status">
                         <p class="display-message">{{ message.message }}</p>
-                        <p class="display-hour">{{ message.date.slice(11, 16) }}</p>
+                        <p class="display-hour">{{ returnHour(message.date) }}</p>
                     </div>
                 </div>
                 <div class="type-message">

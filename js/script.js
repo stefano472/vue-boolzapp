@@ -172,7 +172,7 @@ const boolzapp = new Vue({
         // key per aggiungere un mex all'enter dell'input collegata al value 
         newMessage: '',
         // search bar
-        searchBar: ''
+        searchBar: '',
     },
     methods: {
         // function per passare l'url delle immagini in base all'avatar
@@ -183,7 +183,31 @@ const boolzapp = new Vue({
             const messages = singoloContatto.messages;
             return (messages.length > 0) ? messages[messages.length - 1].message : ''
         },
-       
+
+        // function to return the last date
+        returnLastHour: (singoloContatto) => singoloContatto.messages[singoloContatto.messages.length - 1].date,
+
+        // function per convertire il nostro formato data in uno internazionale per ricavare l'ora
+        convertFromStringToDate(responseDate) {
+            if(!isNaN(responseDate[0])){
+                let dateComponents = responseDate.split(' ');
+                let datePieces = dateComponents[0].split("/");
+                let timePieces = dateComponents[1].split(":");
+                return(new Date(datePieces[2], (datePieces[1] - 1), datePieces[0],
+                                    timePieces[0], timePieces[1], timePieces[2]))
+            } 
+            // siccome la data che inserisco io è già in formato internazionale metto il controllo
+            return responseDate
+        },
+
+        // function per far ritornare l'ora nel formato che voglio io 
+        returnHour(messageDate) {
+            return this.convertFromStringToDate(messageDate).toLocaleTimeString('it-IT', {
+                hour: '2-digit',
+                minute: '2-digit',
+              });
+        },
+
         // function per passare l'indice del conctact selezionato dall'array 
        setActiveContact(i) {
             this.activeContact = i
@@ -191,14 +215,23 @@ const boolzapp = new Vue({
        //function per passare il nuovo mex nell'array
        pushNewMessage(i) {
             if ((this.newMessage.trim()).length > 0) {
-            
+                
                 this.filteredContacts[i].messages.push(
                     {
-                        date: '10/01/2020 15:51:00',
+                        date: new Date(),
                         message: this.newMessage,
                         status: 'sent'
                     }
-                ) 
+                ),
+                setTimeout(() =>{
+                    this.filteredContacts[i].messages.push(
+                        {
+                            date: new Date(),
+                            message: 'Ok',
+                            status: 'received'
+                        }
+                    )
+                }, 1000)
             }
             this.newMessage = ''
        },
