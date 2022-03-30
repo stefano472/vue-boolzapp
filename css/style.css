@@ -125,6 +125,7 @@ h2 {
 }
 
 /* custom scrollbarr */
+
 .contacts::-webkit-scrollbar {
   width: 0.8rem;
 }
@@ -137,6 +138,7 @@ h2 {
   border: 4px solid transparent;
   box-shadow: inset 0 0 10px 10px #e6e6e6;
 }
+
 /* custom scrollbarr */
 
 .contact {
@@ -198,6 +200,7 @@ h2 {
 }
 
 /* custom scrollbarr */
+
 .messages-box::-webkit-scrollbar {
   width: 1rem;
 }
@@ -210,6 +213,7 @@ h2 {
   border: 4px solid transparent;
   box-shadow: inset 0 0 15px 15px #e6e6e6;
 }
+
 /* custom scrollbarr */
 
 .single-message {
