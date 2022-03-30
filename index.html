@@ -44,8 +44,9 @@
                 <div class="contact" v-for="(contact, index) in filteredContacts" @click="setActiveContact(index)">
                     <img :src="imgURLAvatar(contact.avatar)" :alt="'pic-contact'+ contact.avatar">
                     <div class="name-last-message">
-                        <h1>{{contact.name}}</h1>
-                        <p>{{ contact.messages[contact.messages.length - 1].message}}</p>
+                        <h1>{{ contact.name }}</h1>
+                        <p>{{ lastMessage(contact) }}</p>
+                        <!-- <p>{{ filteredContacts }}</p> -->
                     </div>
                     <div class="date">
                         {{ contact.messages[contact.messages.length - 1].date.split(" ")[1].slice(0, 5) }}
@@ -56,9 +57,9 @@
         <div class="right-side">
             <div class="chat-selected" v-if="activeContact !== null">
                 <div class="profile">
-                    <img :src="imgURLAvatar(contacts[activeContact].avatar)" :alt="'-avatar'+ contacts[activeContact].avatar">
+                    <img :src="imgURLAvatar(filteredContacts[activeContact].avatar)" :alt="'pic-avatar'+ filteredContacts[activeContact].avatar">
                     <div class="contact-info">
-                        <h1>{{ contacts[activeContact].name }}</h1>
+                        <h1>{{ filteredContacts[activeContact].name }}</h1>
                         <p>Ultimo accesso oggi alle 12:00</p>
                     </div>
                     <div class="icons">
@@ -68,8 +69,8 @@
                     </div>
                 </div>
                 <div class="messages-box">
-                    <div class="single-message" v-for="message in contacts[activeContact].messages" 
-                        :class="[message.status=== 'sent' ? messageSent : messageReceived]">
+                    <div class="single-message" v-for="message in filteredContacts[activeContact].messages" 
+                        :class="message.status">
                         <p class="display-message">{{ message.message }}</p>
                         <p class="display-hour">{{ message.date.slice(11, 16) }}</p>
                     </div>

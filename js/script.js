@@ -169,9 +169,6 @@ const boolzapp = new Vue({
     data: {
         contacts,
         activeContact: null,
-        // key con classe per i messaggi
-        messageSent: 'message-sent',
-        messageReceived: 'message-received',
         // key per aggiungere un mex all'enter dell'input collegata al value 
         newMessage: '',
         // search bar
@@ -179,9 +176,13 @@ const boolzapp = new Vue({
     },
     methods: {
         // function per passare l'url delle immagini in base all'avatar
-       imgURLAvatar: function(id){
-            return `img/avatar${id}.jpg`;
-       },
+       imgURLAvatar: (id) => `img/avatar${id}.jpg`,
+
+        // function last message
+        lastMessage(singoloContatto) {
+            const messages = singoloContatto.messages;
+            return (messages.length > 0) ? messages[messages.length - 1].message : ''
+        },
        
         // function per passare l'indice del conctact selezionato dall'array 
        setActiveContact(i) {
@@ -191,14 +192,13 @@ const boolzapp = new Vue({
        pushNewMessage(i) {
             if ((this.newMessage.trim()).length > 0) {
             
-                this.contacts[i].messages.push(
+                this.filteredContacts[i].messages.push(
                     {
                         date: '10/01/2020 15:51:00',
                         message: this.newMessage,
                         status: 'sent'
                     }
-                )
-            
+                ) 
             }
             this.newMessage = ''
        },
@@ -209,6 +209,5 @@ const boolzapp = new Vue({
            return this.contacts.filter((contact) => {
                return contact.name.toLowerCase().includes(this.searchBar.toLowerCase())})
         }
-    
     }
 })
