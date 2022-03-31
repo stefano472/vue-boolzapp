@@ -168,7 +168,7 @@ const boolzapp = new Vue({
     el: '#boolzapp',
     data: {
         contacts,
-        activeContact: null,
+        activeContact: undefined,
 
         // key per aggiungere un mex all'enter dell'input collegata al value 
         newMessage: '',
@@ -210,16 +210,16 @@ const boolzapp = new Vue({
         },
 
         // function per passare l'indice del conctact selezionato dall'array 
-       setActiveContact(i) {
-            this.activeContact = i,
-
+       setActiveContact(element) {
+            this.activeContact = element,
             console.log(this.activeContact)
        },
+
        //function per passare il nuovo mex nell'array
        pushNewMessage(i) {
             if ((this.newMessage.trim()).length > 0) {
                 
-                this.filteredContacts[i].messages.push(
+                this.activeContact.messages.push(
                     {
                         date: new Date(),
                         message: this.newMessage,
@@ -227,7 +227,7 @@ const boolzapp = new Vue({
                     }
                 ),
                 setTimeout(() =>{
-                    this.filteredContacts[i].messages.push(
+                    this.activeContact.messages.push(
                         {
                             date: new Date(),
                             message: 'Ok',
@@ -239,13 +239,33 @@ const boolzapp = new Vue({
             this.newMessage = ''
        },
     },
+
     // computed property per filtrare il mio array in base alla searchbar
     computed: {
         filteredContacts() {
-            this.activeContact = null;
-            // console.log(this.activeContact);
             return this.contacts.filter((contact) => {
                return contact.name.toLowerCase().match(this.searchBar.toLowerCase())})
+
+
+            /* opzione alternativa con indice array ma non funzionante
+
+            let newIndex = -1;
+            return this.contacts.filter((contact, index) => {
+                const isActiveIndex = this.activeContact === index;
+               const result = contact.name.toLowerCase().match(this.searchBar.toLowerCase()) 
+               || isActiveIndex ;
+               
+               if (result) {
+                    newIndex++;
+                    if (isActiveIndex) {
+                        this.activeContact = newIndex
+                    }
+               }
+              return result }
+            )
+
+            */
+            
         }
     }
 })
