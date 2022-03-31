@@ -233,6 +233,11 @@ h2 {
   border: none;
   box-shadow: 1px 1px 4px 1px #6a6a6a;
   z-index: 100;
+  display: none;
+}
+
+.modal-active {
+  display: block;
 }
 
 .modal > div {

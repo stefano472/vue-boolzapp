@@ -16,7 +16,7 @@
 </head>
 <body>
     <div class="green-banner"></div>
-    <div id="boolzapp">
+    <div id="boolzapp" @click="refreshActiveModal">
         <div class="left-side">
             <div class="profile">
                 <img src="img/avatar_io.jpg" alt="profile-pic">
@@ -45,9 +45,9 @@
                     <img :src="imgURLAvatar(contact.avatar)" :alt="'pic-contact' + contact.avatar">
                     <div class="name-last-message">
                         <h1>{{ contact.name }}</h1>
-                        <p>{{ lastMessage(contact) }}</p>
+                        <p v-if="contact.messages.length > 0">{{ lastMessage(contact) }}</p>
                     </div>
-                    <div class="date">
+                    <div v-if="contact.messages.length > 0" class="date">
                         {{ returnHour(returnLastHour(contact)) }}
                     </div>
                 </div>
@@ -68,16 +68,19 @@
                     </div>
                 </div>
                 <div class="messages-box">
-                    <div class="single-message" v-for="message in activeContact.messages" 
-                        :class="message.status" @click="showModal(message.modalActive)">
-                        <p class="display-message">{{message.modalActive}} {{ message.message }}</p>
-                        <p class="display-hour">{{ returnHour(message.date) }}</p>
-                        <div v-if="message.modalActive" class="modal">
+                    <div v-for="(message,index) in activeContact.messages" 
+                        @click.stop.prevent
+                        @click="showModal(message)"
+                        :class="message.status"
+                        class="single-message"> 
+                        <p v-if="message.message.length > 0" class="display-message">{{ message.message }}</p>
+                        <p v-if="message.message.length > 0" class="display-hour">{{ returnHour(message.date) }}</p>
+                        <div class="modal" :class="message.modalActive? 'modal-active' : ''">
                             <div>
                                 <i class="fa-solid fa-info"></i>
                                 <span>infos</span>
                             </div>
-                            <div>
+                            <div @click="deleteMessage(index)">
                                 <i class="fa-regular fa-trash-can"></i>
                                 <span>delete</span>
                             </div>

@@ -9,17 +9,17 @@ const contacts = [
             {
                 date: '10/01/2020 15:30:55',
                 message: 'Hai portato a spasso il cane?',
-                status: 'sent'
+                status: 'sent',
             },
             {
                 date: '10/01/2020 15:50:00',
                 message: 'Ricordati di stendere i panni',
-                status: 'sent'
+                status: 'sent',
             },
             {
                 date: '10/01/2020 16:15:22',
                 message: 'Tutto fatto!',
-                status: 'received'
+                status: 'received',
             }
         ],
     },
@@ -164,8 +164,12 @@ const contacts = [
     }
 ];
 
-
-
+for (let i=0; i<contacts.length; i++){
+    const contact = contacts[i]
+    for (let j=0; j<contact.messages.length; j++) {
+        contact.messages[j].modalActive = false
+    }
+}
 
 
 const boolzapp = new Vue({
@@ -174,7 +178,6 @@ const boolzapp = new Vue({
         contacts,
         activeContact: undefined,
 
-        activeModal: false,
         // key per aggiungere un mex all'enter dell'input collegata al value 
         newMessage: '',
         // search bar
@@ -229,7 +232,8 @@ const boolzapp = new Vue({
                     {
                         date: new Date(),
                         message: this.newMessage,
-                        status: 'sent'
+                        status: 'sent',
+                        modalActive: false
                     }
                 ),
                 setTimeout(() =>{
@@ -237,7 +241,8 @@ const boolzapp = new Vue({
                         {
                             date: new Date(),
                             message: 'Ok',
-                            status: 'received'
+                            status: 'received',
+                            modalActive: false
                         }
                     )
                 }, 1000)
@@ -245,10 +250,28 @@ const boolzapp = new Vue({
             this.newMessage = ''
        },
 
-       showModal(messageAction) {
-           messageAction = true;
-           console.table(messageAction);
-           this.activeModal = !this.activeModal
+    //    funzione per cambiare il valore della booleana in modo da visualizzare il modal
+       showModal(contatto) {
+
+            contatto.modalActive = !contatto.modalActive;
+
+       },
+
+    //    function per togglare il modal se premo fuori dal messaggio
+       refreshActiveModal() {
+           if (this.activeContact) {
+            const messaggi = this.activeContact.messages
+                for (let i=0; i < messaggi.length; i++) {
+                    const messaggio = messaggi[i];
+                    if (messaggio.modalActive) {
+                        messaggio.modalActive = !messaggio.modalActive;
+                    }
+                }
+       }},
+
+    //    function per cancellare il mex
+       deleteMessage(indice) {
+           this.activeContact.messages.splice(indice, 1)
        }
     },
 
@@ -256,12 +279,7 @@ const boolzapp = new Vue({
     computed: {
 
         filteredContacts() {
-            for (let i=0; i<this.contacts.length; i++){
-                const contact = this.contacts[i]
-                for (let j=0; j<contact.messages.length; j++) {
-                    contact.messages[j].modalActive = true
-                }
-            }
+   
             return this.contacts.filter((contact) => {
                return contact.name.toLowerCase().match(this.searchBar.toLowerCase())})
 
@@ -288,5 +306,3 @@ const boolzapp = new Vue({
         }
     }
 })
-
-console.table(contacts[0].messages);
