@@ -164,16 +164,22 @@ const contacts = [
     }
 ];
 
+
+
+
+
 const boolzapp = new Vue({
     el: '#boolzapp',
     data: {
         contacts,
         activeContact: undefined,
 
+        activeModal: false,
         // key per aggiungere un mex all'enter dell'input collegata al value 
         newMessage: '',
         // search bar
         searchBar: '',
+
     },
     methods: {
         // function per passare l'url delle immagini in base all'avatar
@@ -238,11 +244,24 @@ const boolzapp = new Vue({
             }
             this.newMessage = ''
        },
+
+       showModal(messageAction) {
+           messageAction = true;
+           console.table(messageAction);
+           this.activeModal = !this.activeModal
+       }
     },
 
     // computed property per filtrare il mio array in base alla searchbar
     computed: {
+
         filteredContacts() {
+            for (let i=0; i<this.contacts.length; i++){
+                const contact = this.contacts[i]
+                for (let j=0; j<contact.messages.length; j++) {
+                    contact.messages[j].modalActive = true
+                }
+            }
             return this.contacts.filter((contact) => {
                return contact.name.toLowerCase().match(this.searchBar.toLowerCase())})
 
@@ -269,3 +288,5 @@ const boolzapp = new Vue({
         }
     }
 })
+
+console.table(contacts[0].messages);

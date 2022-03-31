@@ -221,6 +221,33 @@ h2 {
   font-size: 0.9rem;
   border-radius: 5px;
   display: flex;
+  position: relative;
+}
+
+.modal {
+  position: absolute;
+  right: 5px;
+  background-color: white;
+  padding: 0.2rem 0;
+  border-radius: 3px;
+  border: none;
+  box-shadow: 1px 1px 4px 1px #6a6a6a;
+  z-index: 100;
+}
+
+.modal > div {
+    padding: 0.2rem 0.5rem;
+    display: flex;
+    gap: 0.5rem;
+}
+.modal > div:hover {
+  cursor: pointer;
+  background-color: #f9f9f9;
+}
+
+.modal .fa-info {
+  width: 12.61px;
+  text-align: center;
 }
 
 .display-message {

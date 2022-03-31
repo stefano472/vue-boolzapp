@@ -41,7 +41,7 @@
                 <input type="text" placeholder="Cerca o inizia una nuova chat" v-model="searchBar">
             </div>
             <div class="contacts">
-                <div class="contact" v-for="(contact, index) in filteredContacts" @click="setActiveContact(contact)">
+                <div class="contact" v-for="contact in filteredContacts" @click="setActiveContact(contact)">
                     <img :src="imgURLAvatar(contact.avatar)" :alt="'pic-contact' + contact.avatar">
                     <div class="name-last-message">
                         <h1>{{ contact.name }}</h1>
@@ -69,9 +69,19 @@
                 </div>
                 <div class="messages-box">
                     <div class="single-message" v-for="message in activeContact.messages" 
-                        :class="message.status">
-                        <p class="display-message">{{ message.message }}</p>
+                        :class="message.status" @click="showModal(message.modalActive)">
+                        <p class="display-message">{{message.modalActive}} {{ message.message }}</p>
                         <p class="display-hour">{{ returnHour(message.date) }}</p>
+                        <div v-if="message.modalActive" class="modal">
+                            <div>
+                                <i class="fa-solid fa-info"></i>
+                                <span>infos</span>
+                            </div>
+                            <div>
+                                <i class="fa-regular fa-trash-can"></i>
+                                <span>delete</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="type-message">
