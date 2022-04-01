@@ -226,12 +226,12 @@ h2 {
 
 .modal {
   position: absolute;
-  right: 5px;
+  right: -5px;
   background-color: white;
   padding: 0.2rem 0;
   border-radius: 3px;
   border: none;
-  box-shadow: 1px 1px 4px 1px #6a6a6a;
+  box-shadow: 0 0 2px 0 #6a6a6a;
   z-index: 100;
   display: none;
 }
@@ -243,7 +243,7 @@ h2 {
 .modal > div {
     padding: 0.2rem 0.5rem;
     display: flex;
-    gap: 0.5rem;
+    gap: 1rem;
 }
 .modal > div:hover {
   cursor: pointer;
@@ -279,15 +279,12 @@ h2 {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap:  0.2rem;
 }
 
 .display-hour i {
   cursor: pointer;
   width: 20px;
   height: 20px;
-  line-height: 20px;
-  vertical-align: middle;
   text-align: end;
 }
 
@@ -334,4 +331,8 @@ h2 {
   border-radius: 15px;
   background-color: rgba(0, 0, 0, 0.4);
   color: white;
+}
+
+i:hover {
+  color: #777;
 }

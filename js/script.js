@@ -218,6 +218,20 @@ const boolzapp = new Vue({
               });
         },
 
+        lastReceivedMessage() {
+            const messaggiRicevuti = this.activeContact.messages.filter(messaggio => messaggio.status == 'received');
+            if (messaggiRicevuti.length > 0) {
+
+                    const date = this.convertFromStringToDate(messaggiRicevuti[messaggiRicevuti.length-1].date);
+                    const day = date.toLocaleDateString();
+                    const time = date.toLocaleTimeString('it-IT', {
+                        hour: '2-digit',
+                        minute: '2-digit',
+                      })
+                    return `${day} ${time}`                
+            }
+        },
+
         // function per passare l'indice del conctact selezionato dall'array 
        setActiveContact(element) {
             this.activeContact = element,

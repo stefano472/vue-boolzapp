@@ -59,7 +59,7 @@
                     <img :src="imgURLAvatar(activeContact.avatar)" :alt="'pic-avatar'+ activeContact.avatar">
                     <div class="contact-info">
                         <h1>{{ activeContact.name }}</h1>
-                        <p>Ultimo accesso oggi alle 12:00</p>
+                        <p>Ultimo accesso: {{lastReceivedMessage()}}</p>
                     </div>
                     <div class="icons">
                         <i class="fa-solid fa-magnifying-glass"></i>
@@ -81,7 +81,19 @@
                         <div class="modal" :class="message.modalActive? 'modal-active' : ''">
                             <div>
                                 <i class="fa-solid fa-info"></i>
-                                <span>infos</span>
+                                <span>info</span>
+                            </div>
+                            <div>
+                                <i class="fa-solid fa-pencil"></i>
+                                <span>edit</span>
+                            </div>
+                            <div>
+                                <i class="fa-solid fa-copy"></i>
+                                <span>copy</span>
+                            </div>
+                            <div>
+                                <i class="fa-regular fa-circle-check"></i>
+                                <span>select</span>
                             </div>
                             <div @click="deleteMessage(index)">
                                 <i class="fa-regular fa-trash-can"></i>
