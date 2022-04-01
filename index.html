@@ -72,12 +72,8 @@
                         :class="message.status"
                         class="single-message f-size_09"> 
                         <p v-if="message.message.length > 0" class="display-message">{{ message.message }}</p>
-                        <p v-if="message.message.length > 0" class="display-hour">
-                            <i @click.stop
-                                @click="showModal(message)"
-                                class="fa-solid fa-caret-down"></i>
-                            <span>{{ returnHour(message.date) }}</span>
-                        </p>
+                        <p v-if="message.message.length > 0" class="display-hour">{{ returnHour(message.date) }}</p>
+                        <i v-if="message.message.length > 0" @click.stop @click="showModal(message)" class="fa-solid fa-ellipsis-vertical"></i>
                         <div class="modal" :class="message.modalActive? 'modal-active' : ''">
                             <div>
                                 <i class="fa-solid fa-info"></i>

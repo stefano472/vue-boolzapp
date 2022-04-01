@@ -146,11 +146,14 @@ h2 {
 /* custom scrollbarr */
 
 .contact {
-  padding: 0.5rem 0.5rem 0.5rem 0;
+  padding: 0.5rem 0.5rem 0.5rem 0.8rem;
   display: flex;
-  margin-left: 0.8rem;
   border-bottom: 1px solid #eee;
   cursor: pointer;
+}
+
+.contact:hover {
+  background-color: #f9f9f9;
 }
 
 .name-last-message {
@@ -219,13 +222,13 @@ h2 {
 .single-message {
   padding: 0.5rem 0.8rem;
   border-radius: 5px;
-  display: flex;
   position: relative;
 }
 
 .modal {
   position: absolute;
-  right: -5px;
+  top: 20px;
+  right: -10px;
   background-color: white;
   padding: 0.2rem 0;
   border-radius: 3px;
@@ -256,7 +259,7 @@ h2 {
 
 .display-message {
   line-height: 1.5rem;
-  padding-right: 1rem;
+  padding-right: 1.5rem;
   align-self: center;
 }
 
@@ -273,22 +276,26 @@ h2 {
 }
 
 .display-hour {
-  font-size: 0.7rem;
+  position: absolute;
+  bottom: 2px;
+  right: 5px;
+  font-size: 0.6rem;
   color: #b1b1b1;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
 }
 
-.display-hour i {
+.single-message > i {
+  font-size: 0.7rem;
+  position: absolute;
+  top: 4px;
+  right: 5px;
+  color: #b1b1b1;
   cursor: pointer;
   width: 20px;
   height: 20px;
   text-align: end;
 }
 
-.display-hour i:hover {
-  transform: scale(1.1);
+.single-message i:hover {
   color: black;
 }
 
