@@ -195,7 +195,11 @@ const boolzapp = new Vue({
         // function last message
         lastMessage(singoloContatto) {
             const messages = singoloContatto.messages;
-            return (messages.length > 0) ? messages[messages.length - 1].message : ''
+            const lastMessage = messages[messages.length - 1].message
+            if (lastMessage.length > 30) {
+                return lastMessage.slice(0, 30) + '...'
+            }
+            return (messages.length > 0) ? lastMessage : ''
         },
 
         // function to return the last date
