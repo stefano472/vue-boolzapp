@@ -17,7 +17,7 @@
 <body>
     <div class="green-banner"></div>
     <div id="boolzapp" @click="refreshActiveModal">
-        <div class="left-side">
+        <div class="left-side" :class="displayLeftInMediaQuery()">
             <div class="profile">
                 <img :src="imgURLAvatar(myProfile.avatar)" alt="profile-pic">
                 <h1 class="f-size_09">{{ myProfile.name }}</h1>
@@ -53,9 +53,10 @@
                 </div>
             </div>
         </div>
-        <div class="right-side">
+        <div class="right-side" :class="displayRightInMediaQuery()">
             <div class="chat-selected" v-if="activeContact">
                 <div class="profile">
+                    <i class="fa-solid fa-arrow-left" @click="backMenu"></i>
                     <img :src="imgURLAvatar(activeContact.avatar)" :alt="'pic-avatar'+ activeContact.avatar">
                     <div class="contact-info">
                         <h1 class="f-size_09">{{ activeContact.name }}</h1>

@@ -116,6 +116,7 @@ h2 {
 }
 
 .search-bar input {
+  width: 100%;
   flex-grow: 1;
   border: 1px solid #eee;
   padding-left: 0.5rem;
@@ -176,6 +177,7 @@ h2 {
 }
 
 .chat-selected {
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -184,6 +186,16 @@ h2 {
 .chat-selected .profile {
   border: none;
   padding-right: 1rem;
+}
+
+.chat-selected .profile > i {
+  display: none;
+  padding: 0.5rem;
+  margin-right: 1rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border-radius: 50%;
+  background: white;
 }
 
 .contact-info {
@@ -344,4 +356,41 @@ h2 {
 
 i:hover {
   color: #777;
+}
+
+
+@media screen and (max-width: 750px) {
+  #boolzapp {
+    width: 98%
+  }
+
+  .left-side {
+    width:100%;
+    display: none;
+  }
+
+  .profile {
+    border: none;
+  }
+
+  .contacts {
+    border-bottom-right-radius: 10px;
+  }
+
+  .right-side{
+    display: none;
+    width: 100%;
+  }
+  
+  .display-query {
+    display: flex;
+  }
+
+  .chat-selected .profile > i {
+    display: block;
+  }
+
+  .type-message {
+    border-bottom-left-radius: 10px;
+  }
 }

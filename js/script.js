@@ -171,7 +171,6 @@ for (let i=0; i<contacts.length; i++){
     }
 }
 
-
 const boolzapp = new Vue({
     el: '#boolzapp',
     data: {
@@ -295,7 +294,23 @@ const boolzapp = new Vue({
     //    function per cancellare il mex
        deleteMessage(indice) {
            this.activeContact.messages.splice(indice, 1)
-       }
+       },
+
+       backMenu() {
+           this.activeContact = undefined
+       },
+
+       displayLeftInMediaQuery() {
+           if (!this.activeContact) {
+               return "display-query"
+           }
+       },
+
+       displayRightInMediaQuery() {
+        if (this.activeContact) {
+            return "display-query"
+        }
+    }
     },
 
     // computed property per filtrare il mio array in base alla searchbar
@@ -328,4 +343,7 @@ const boolzapp = new Vue({
             
         }
     }
-})
+});
+
+
+// document.getElementById('back-button').innerText('cioa')
