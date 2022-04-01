@@ -175,6 +175,10 @@ for (let i=0; i<contacts.length; i++){
 const boolzapp = new Vue({
     el: '#boolzapp',
     data: {
+        myProfile: {
+            name: 'Stefano',
+            avatar: '_mine'
+        },
         contacts,
         activeContact: undefined,
 
@@ -218,6 +222,7 @@ const boolzapp = new Vue({
               });
         },
 
+        // function to show the last received message in top right side area
         lastReceivedMessage() {
             const messaggiRicevuti = this.activeContact.messages.filter(messaggio => messaggio.status == 'received');
             if (messaggiRicevuti.length > 0) {

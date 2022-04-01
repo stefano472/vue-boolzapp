@@ -19,8 +19,8 @@
     <div id="boolzapp" @click="refreshActiveModal">
         <div class="left-side">
             <div class="profile">
-                <img src="img/avatar_io.jpg" alt="profile-pic">
-                <h1>Sofia</h1>
+                <img :src="imgURLAvatar(myProfile.avatar)" alt="profile-pic">
+                <h1 class="f-size_09">{{ myProfile.name }}</h1>
                 <div class="icons">
                     <i class="fa-solid fa-circle-notch"></i>
                     <i class="fa-solid fa-message"></i>
@@ -44,7 +44,7 @@
                 <div class="contact" v-for="contact in filteredContacts" @click="setActiveContact(contact)">
                     <img :src="imgURLAvatar(contact.avatar)" :alt="'pic-contact' + contact.avatar">
                     <div class="name-last-message">
-                        <h1>{{ contact.name }}</h1>
+                        <h1 class="f-size_09">{{ contact.name }}</h1>
                         <p v-if="contact.messages.length > 0">{{ lastMessage(contact) }}</p>
                     </div>
                     <div v-if="contact.messages.length > 0" class="date">
@@ -58,7 +58,7 @@
                 <div class="profile">
                     <img :src="imgURLAvatar(activeContact.avatar)" :alt="'pic-avatar'+ activeContact.avatar">
                     <div class="contact-info">
-                        <h1>{{ activeContact.name }}</h1>
+                        <h1 class="f-size_09">{{ activeContact.name }}</h1>
                         <p>Ultimo accesso: {{lastReceivedMessage()}}</p>
                     </div>
                     <div class="icons">
@@ -70,7 +70,7 @@
                 <div class="messages-box">
                     <div v-for="(message,index) in activeContact.messages" 
                         :class="message.status"
-                        class="single-message"> 
+                        class="single-message f-size_09"> 
                         <p v-if="message.message.length > 0" class="display-message">{{ message.message }}</p>
                         <p v-if="message.message.length > 0" class="display-hour">
                             <i @click.stop
@@ -104,7 +104,7 @@
                 </div>
                 <div class="type-message">
                     <i class="fa-regular fa-face-smile"></i>
-                    <input type="text" placeholder="scrivi un messaggio" v-model="newMessage" @keyUp.enter="pushNewMessage(activeContact)">
+                    <input type="text" class="f-size_09" placeholder="scrivi un messaggio" v-model="newMessage" @keyUp.enter="pushNewMessage(activeContact)">
                     <i class="fa-solid fa-microphone"></i>
                 </div>
             </div>

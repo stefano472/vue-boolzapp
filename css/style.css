@@ -5,6 +5,11 @@
   font-family: "DM Sans", sans-serif;
 }
 
+/* Utilities */
+.f-size_09 {
+  font-size: 00.9rem;
+}
+
 body {
   width: 100%;
   height: 100vh;
@@ -55,7 +60,6 @@ img {
 .profile h1 {
   padding-left: 0.2rem;
   flex-grow: 1;
-  font-size: 0.9rem;
 }
 
 .icons i {
@@ -154,10 +158,6 @@ h2 {
   padding-left: 0.5rem;
 }
 
-.name-last-message h1 {
-  font-size: 0.9rem;
-}
-
 .name-last-message p,
 .date {
   font-size: 0.7rem;
@@ -218,7 +218,6 @@ h2 {
 
 .single-message {
   padding: 0.5rem 0.8rem;
-  font-size: 0.9rem;
   border-radius: 5px;
   display: flex;
   position: relative;
@@ -311,7 +310,6 @@ h2 {
 .type-message input {
   border: none;
   flex-grow: 1;
-  font-size: 0.9rem;
   padding: 0.5rem 0.8rem;
   border-radius: 5px;
 }
