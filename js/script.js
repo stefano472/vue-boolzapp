@@ -164,12 +164,22 @@ const contacts = [
     }
 ];
 
-for (let i=0; i<contacts.length; i++){
-    const contact = contacts[i]
-    for (let j=0; j<contact.messages.length; j++) {
-        contact.messages[j].modalActive = false
-    }
-}
+
+// soluzione ciclando con for
+// for (let i=0; i<contacts.length; i++){
+//     const contact = contacts[i]
+//     for (let j=0; j<contact.messages.length; j++) {
+//         contact.messages[j].modalActive = false
+//     }
+// };
+
+// soluzione ciclando con map e forEach
+contacts.map(contact => {
+    contact.messages.forEach(message => {
+        message.modalActive = false
+    });
+    return contact
+});
 
 const boolzapp = new Vue({
     el: '#boolzapp',
@@ -274,7 +284,9 @@ const boolzapp = new Vue({
 
     //    funzione per cambiare il valore della booleana in modo da visualizzare il modal
        showModal(contatto) {
-
+           if (!contatto.modalActive){
+               this.activeContact.messages.forEach(message => message.modalActive = false)
+            };
             contatto.modalActive = !contatto.modalActive;
 
        },
@@ -282,13 +294,17 @@ const boolzapp = new Vue({
     //    function per togglare il modal se premo fuori dal messaggio
        refreshActiveModal() {
            if (this.activeContact) {
-            const messaggi = this.activeContact.messages
+            const messaggi = this.activeContact.messages;
+                messaggi.forEach(messaggio => messaggio.modalActive = false);
+
+                /* soluzione con ciclo for
                 for (let i=0; i < messaggi.length; i++) {
                     const messaggio = messaggi[i];
                     if (messaggio.modalActive) {
                         messaggio.modalActive = !messaggio.modalActive;
                     }
                 }
+                */
        }},
 
     //    function per cancellare il mex
@@ -344,6 +360,3 @@ const boolzapp = new Vue({
         }
     }
 });
-
-
-// document.getElementById('back-button').innerText('cioa')
