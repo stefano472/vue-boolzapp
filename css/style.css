@@ -126,12 +126,12 @@ h2 {
   background-color: white;
   flex-grow: 1;
   border-bottom-left-radius: 10px;
-  overflow-y: hidden;
+  overflow-y: auto;
 }
 
-.contacts:hover {
+/* .contacts:hover {
   overflow-y: overlay;
-}
+} */
 
 /* custom scrollbarr */
 
